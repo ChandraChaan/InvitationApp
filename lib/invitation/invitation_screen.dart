@@ -62,7 +62,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
                   color: Colors.white,
                   child: Container(
                     //todo conditional color
-                    color: Colors.green.shade100,
+                    color: Colors.green.withOpacity(1.0),
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -112,10 +112,10 @@ class _InvitationScreenState extends State<InvitationScreen> {
                   children: [
                     Container(
                       //todo conditional color
-                      color: Colors.white,
+                      // color: Colors.white,
                       child: Container(
                         //todo conditional color
-                        color: Colors.green,
+                        // color: Colors.green,
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
@@ -139,13 +139,13 @@ class _InvitationScreenState extends State<InvitationScreen> {
                             ),
                             const SizedBox(height: 8.0),
                             if (_isWidgetVisible == false)
-                            Text(
-                              'Swetha',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(color: Colors.white),
-                            ),
+                              Text(
+                                'Swetha',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge
+                                    ?.copyWith(color: Colors.white),
+                              ),
                             const SizedBox(height: 32.0),
                           ],
                         ),
