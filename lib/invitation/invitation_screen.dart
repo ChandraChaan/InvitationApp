@@ -19,8 +19,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
         setState(() {
           _isWidgetVisible = false;
         });
-      }
-      else {
+      } else {
         setState(() {
           _isWidgetVisible = true;
         });
@@ -64,57 +63,49 @@ class _InvitationScreenState extends State<InvitationScreen> {
                 ),
               ),
             ),
-            if (_isWidgetVisible)
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    //todo conditional color
-                    // color: Colors.white.withOpacity(_widgetOpacity),
-                    child: Container(
-                      //todo conditional color
-                      color: Colors.green.withOpacity(_widgetOpacity),
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            ' ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(color: Colors.white),
-                          ),
-                          const SizedBox(height: 8.0),
-                          const Text(
-                            ' ',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Swetha',
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(color: Colors.white),
-                          ),
-                          const SizedBox(height: 32.0),
-                        ],
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  color: Colors.green.withOpacity(_widgetOpacity),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        ' ',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(color: Colors.white),
                       ),
-                    ),
+                      const SizedBox(height: 8.0),
+                      const Text(
+                        ' ',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Swetha',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(color: Colors.white),
+                      ),
+                      const SizedBox(height: 32.0),
+                    ],
                   ),
                 ),
               ),
+            ),
             Positioned(
               top: 0,
               left: 0,
@@ -127,45 +118,41 @@ class _InvitationScreenState extends State<InvitationScreen> {
                   controller: _scrollController,
                   child: Column(
                     children: [
-                      Container(
-                        //todo conditional color
-                        // color: Colors.white,
-                        child: Container(
-                          //todo conditional color
-                          // color: Colors.green,
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Chandra ObulReddy',
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Chandra ObulReddy',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            const SizedBox(height: 8.0),
+                            const Text(
+                              'Weds',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            Opacity(
+                              opacity: _widgetOpacity / 8,
+                              child: Text(
+                                _isWidgetVisible ? 'Swetha' : '',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displayLarge
                                     ?.copyWith(color: Colors.white),
                               ),
-                              const SizedBox(height: 8.0),
-                              const Text(
-                                'Weds',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              if (_isWidgetVisible == false)
-                                Text(
-                                  'Swetha',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge
-                                      ?.copyWith(color: Colors.white),
-                                ),
-                              const SizedBox(height: 32.0),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 32.0),
+                          ],
                         ),
                       ),
                       Container(
