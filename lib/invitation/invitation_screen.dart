@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class InvitationScreen extends StatefulWidget {
+  const InvitationScreen({super.key});
+
   @override
   State<InvitationScreen> createState() => _InvitationScreenState();
 }
 
 class _InvitationScreenState extends State<InvitationScreen> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   bool _isWidgetVisible = true;
   double _widgetOpacity = 1.0;
 
