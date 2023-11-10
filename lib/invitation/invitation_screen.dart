@@ -7,15 +7,33 @@ class InvitationScreen extends StatefulWidget {
   State<InvitationScreen> createState() => _InvitationScreenState();
 }
 
-class _InvitationScreenState extends State<InvitationScreen> {
+class _InvitationScreenState extends State<InvitationScreen>
+    with SingleTickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
   bool _isWidgetVisible = true;
   double _widgetOpacity = 1.0;
   bool alignRight = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    // Repeat the animation indefinitely
+    _controller.repeat(reverse: true);
+
     _scrollController.addListener(() {
       if (_scrollController.offset > 100) {
         // Adjust the offset value as needed
@@ -44,6 +62,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -82,42 +101,50 @@ class _InvitationScreenState extends State<InvitationScreen> {
                 child: Container(
                   color: Colors.green.withOpacity(_widgetOpacity),
                   child: Column(
-                    mainAxisAlignment: alignRight
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        ' ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge
-                            ?.copyWith(color: Colors.white),
-                      ),
-                      const SizedBox(height: 8.0),
-                      const Text(
-                        ' ',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          mainAxisAlignment: alignRight
+                              ? MainAxisAlignment.center
+                              : MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              ' ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            const SizedBox(height: 8.0),
+                            const Text(
+                              ' ',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            AnimatedAlign(
+                              alignment: alignRight
+                                  ? Alignment.center
+                                  : Alignment.bottomRight,
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.easeInOut,
+                              child: Text(
+                                _isWidgetVisible ? ' ' : '2',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge
+                                    ?.copyWith(color: Colors.white),
+                              ),
+                            ),
+                            const SizedBox(height: 32.0),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 8.0),
-                      AnimatedAlign(
-                        alignment: alignRight
-                            ? Alignment.center
-                            : Alignment.bottomRight,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeInOut,
-                        child: Text(
-                          _isWidgetVisible ? ' ' : '2',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ),
-                      const SizedBox(height: 32.0),
+                      Expanded(flex: 1, child: Container())
                     ],
                   ),
                 ),
@@ -139,37 +166,61 @@ class _InvitationScreenState extends State<InvitationScreen> {
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              '1',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(color: Colors.white),
-                            ),
-                            const SizedBox(height: 8.0),
-                            const Text(
-                              '3',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontStyle: FontStyle.italic,
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '1',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge
+                                        ?.copyWith(color: Colors.white),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  const Text(
+                                    '3',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  Opacity(
+                                    opacity: _isWidgetVisible
+                                        ? 1
+                                        : (_widgetOpacity / 8),
+                                    child: Text(
+                                      _isWidgetVisible ? '2' : '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge
+                                          ?.copyWith(color: Colors.white),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 32.0),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 8.0),
-                            Opacity(
-                              opacity:
-                                  _isWidgetVisible ? 1 : (_widgetOpacity / 8),
-                              child: Text(
-                                _isWidgetVisible ? '2' : '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayLarge
-                                    ?.copyWith(color: Colors.white),
-                              ),
+                            Expanded(
+                              flex: 1,
+                              child: _isWidgetVisible
+                                  ? FadeTransition(
+                                      opacity: _animation,
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.arrow_downward,
+                                          size: 40.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                             ),
-                            const SizedBox(height: 32.0),
                           ],
                         ),
                       ),
