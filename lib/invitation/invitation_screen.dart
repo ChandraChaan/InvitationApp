@@ -11,6 +11,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isWidgetVisible = true;
   double _widgetOpacity = 1.0;
+  bool alignRight = false;
 
   @override
   void initState() {
@@ -31,6 +32,11 @@ class _InvitationScreenState extends State<InvitationScreen> {
         _widgetOpacity = 1.0 - (_scrollController.offset / 200.0);
         // 200.0 is the threshold where the widget will become completely transparent
         _widgetOpacity = _widgetOpacity.clamp(0.0, 1.0);
+        if (_widgetOpacity < 0.4) {
+          alignRight = false;
+        } else {
+          alignRight = true;
+        }
       });
     });
   }
@@ -76,7 +82,9 @@ class _InvitationScreenState extends State<InvitationScreen> {
                 child: Container(
                   color: Colors.green.withOpacity(_widgetOpacity),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: alignRight
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -95,12 +103,19 @@ class _InvitationScreenState extends State<InvitationScreen> {
                         ),
                       ),
                       const SizedBox(height: 8.0),
-                      Text(
-                        'Swetha',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge
-                            ?.copyWith(color: Colors.white),
+                      AnimatedAlign(
+                        alignment: alignRight
+                            ? Alignment.center
+                            : Alignment.bottomRight,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOut,
+                        child: Text(
+                          _isWidgetVisible ? ' ' : '2',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge
+                              ?.copyWith(color: Colors.white),
+                        ),
                       ),
                       const SizedBox(height: 32.0),
                     ],
@@ -128,7 +143,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Chandra ObulReddy',
+                              '1',
                               style: Theme.of(context)
                                   .textTheme
                                   .displayLarge
@@ -136,7 +151,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
                             ),
                             const SizedBox(height: 8.0),
                             const Text(
-                              'Weds',
+                              '3',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontStyle: FontStyle.italic,
@@ -144,9 +159,10 @@ class _InvitationScreenState extends State<InvitationScreen> {
                             ),
                             const SizedBox(height: 8.0),
                             Opacity(
-                              opacity: _widgetOpacity / 8,
+                              opacity:
+                                  _isWidgetVisible ? 1 : (_widgetOpacity / 8),
                               child: Text(
-                                _isWidgetVisible ? 'Swetha' : '',
+                                _isWidgetVisible ? '2' : '',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displayLarge
