@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class InvitationScreen extends StatefulWidget {
@@ -52,7 +53,8 @@ class _InvitationScreenState extends State<InvitationScreen>
         _widgetOpacity = _widgetOpacity.clamp(0.0, 1.0);
         if (_widgetOpacity < 0.4) {
           alignRight = false;
-        } else {
+        }
+        else {
           alignRight = true;
         }
       });
@@ -85,7 +87,7 @@ class _InvitationScreenState extends State<InvitationScreen>
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/wallpaper.jpeg'),
+                  image: AssetImage('assets/images/swetha.jpeg'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -99,7 +101,16 @@ class _InvitationScreenState extends State<InvitationScreen>
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  color: Colors.green.withOpacity(_widgetOpacity),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFFFFD700).withOpacity(_widgetOpacity),
+                        const Color(0xFFFFB90F).withOpacity(_widgetOpacity),
+                      ],
+                    ),
+                  ),
                   child: Column(
                     children: [
                       Expanded(
@@ -133,7 +144,7 @@ class _InvitationScreenState extends State<InvitationScreen>
                               duration: const Duration(seconds: 1),
                               curve: Curves.easeInOut,
                               child: Text(
-                                _isWidgetVisible ? ' ' : '2',
+                                _isWidgetVisible ? ' ' : 'Swetha',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displayLarge
@@ -174,27 +185,37 @@ class _InvitationScreenState extends State<InvitationScreen>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '1',
+                                    'Chandra ObulaReddy',
+                                    textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayLarge
                                         ?.copyWith(color: Colors.white),
                                   ),
                                   const SizedBox(height: 8.0),
-                                  const Text(
-                                    '3',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontStyle: FontStyle.italic,
-                                    ),
+                                DefaultTextStyle(
+                                  style: const TextStyle(
+                                    fontSize: 20.0,
                                   ),
+                                  child: AnimatedTextKit(
+                                    animatedTexts: [
+                                      WavyAnimatedText('Weds'),
+                                      WavyAnimatedText('Weds'),
+                                      WavyAnimatedText('Weds'),
+                                    ],
+                                    isRepeatingAnimation: true,
+                                    onTap: () {
+                                      print("Tap Event");
+                                    },
+                                  ),
+                                ),
                                   const SizedBox(height: 8.0),
                                   Opacity(
                                     opacity: _isWidgetVisible
                                         ? 1
                                         : (_widgetOpacity / 8),
                                     child: Text(
-                                      _isWidgetVisible ? '2' : '',
+                                      _isWidgetVisible ? 'Swetha' : '',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge
@@ -214,7 +235,7 @@ class _InvitationScreenState extends State<InvitationScreen>
                                         padding: EdgeInsets.all(8.0),
                                         child: Icon(
                                           Icons.arrow_downward,
-                                          size: 40.0,
+                                          size: 60.0,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -224,10 +245,44 @@ class _InvitationScreenState extends State<InvitationScreen>
                           ],
                         ),
                       ),
-                      Container(
-                        color: Colors.transparent,
+                      SizedBox(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Container(),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: FadeTransition(
+                                opacity: _animation,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.arrow_upward,
+                                    size: 60.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/chandra.JPG'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
